@@ -16,7 +16,7 @@ E: Unable to lock the administration directory (/var/lib/dpkg/), are you root?
 
 ➜ dwim
 sudo apt-get install vim [enter/↑/↓/ctrl+c]
-[sudo] password for nvbn:
+[sudo] password for aoeu:
 Reading package lists... Done
 ...
 ```
@@ -84,7 +84,7 @@ E: Unable to lock the administration directory (/var/lib/dpkg/), are you root?
 
 ➜ dwim
 sudo apt-get install vim
-[sudo] password for nvbn:
+[sudo] password for aoeu:
 Reading package lists... Done
 ...
 ```
@@ -116,7 +116,7 @@ On other systems you can install `DWIM` with `pip`:
 sudo -H pip install dwim
 ```
 
-[Or using an OS package manager (OS X, Ubuntu, Arch).](https://github.com/nvbn/dwim/wiki/Installation)
+[Or using an OS package manager (OS X, Ubuntu, Arch).](https://github.com/aoeu/dwim/wiki/Installation)
 
 You should place this command in your `.bash_profile`, `.bashrc`, `.zshrc` or other startup script:
 
@@ -126,7 +126,7 @@ eval "$(dwim --alias)"
 eval "$(dwim --alias DWIM)"
 ```
 
-[Or in your shell config (Bash, Zsh, Fish, Powershell, tcsh).](https://github.com/nvbn/dwim/wiki/Shell-aliases)
+[Or in your shell config (Bash, Zsh, Fish, Powershell, tcsh).](https://github.com/aoeu/dwim/wiki/Shell-aliases)
 
 Changes will be available only in a new shell session.
 To make them available immediately, run `source ~/.bashrc` (or your shell config file like `.zshrc`).
@@ -300,9 +300,9 @@ priority = 1000  # Lower first, default is 1000
 requires_output = True
 ```
 
-[More examples of rules](https://github.com/nvbn/dwim/tree/master/dwim/rules),
-[utility functions for rules](https://github.com/nvbn/dwim/tree/master/dwim/utils.py),
-[app/os-specific helpers](https://github.com/nvbn/dwim/tree/master/dwim/specific/).
+[More examples of rules](https://github.com/aoeu/dwim/tree/master/dwim/rules),
+[utility functions for rules](https://github.com/aoeu/dwim/tree/master/dwim/utils.py),
+[app/os-specific helpers](https://github.com/aoeu/dwim/tree/master/dwim/specific/).
 
 ## Settings
 
@@ -396,12 +396,12 @@ Project License can be found [here](LICENSE.md).
 
 [version-badge]:   https://img.shields.io/pypi/v/dwim.svg?label=version
 [version-link]:    https://pypi.python.org/pypi/dwim/
-[travis-badge]:    https://img.shields.io/travis/nvbn/dwim.svg
-[travis-link]:     https://travis-ci.org/nvbn/dwim
-[appveyor-badge]:  https://img.shields.io/appveyor/ci/nvbn/dwim.svg?label=windows%20build
-[appveyor-link]:   https://ci.appveyor.com/project/nvbn/dwim
-[coverage-badge]:  https://img.shields.io/coveralls/nvbn/dwim.svg
-[coverage-link]:   https://coveralls.io/github/nvbn/dwim
+[travis-badge]:    https://img.shields.io/travis/aoeu/dwim.svg
+[travis-link]:     https://travis-ci.org/aoeu/dwim
+[appveyor-badge]:  https://img.shields.io/appveyor/ci/aoeu/dwim.svg?label=windows%20build
+[appveyor-link]:   https://ci.appveyor.com/project/aoeu/dwim
+[coverage-badge]:  https://img.shields.io/coveralls/aoeu/dwim.svg
+[coverage-link]:   https://coveralls.io/github/aoeu/dwim
 [license-badge]:   https://img.shields.io/badge/license-MIT-007EC7.svg
-[examples-link]:   https://raw.githubusercontent.com/nvbn/dwim/master/example.gif
+[examples-link]:   https://raw.githubusercontent.com/aoeu/dwim/master/example.gif
 [homebrew]:        http://brew.sh/

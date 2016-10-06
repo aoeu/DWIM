@@ -92,4 +92,4 @@ def how_to_configure_alias(configuration_details):
                 reset=color(colorama.Style.RESET_ALL),
                 path=path,
                 content=content))
-    print('More details - https://github.com/nvbn/dwim#manual-installation')
+    print('More details - https://github.com/aoeu/dwim#manual-installation')
