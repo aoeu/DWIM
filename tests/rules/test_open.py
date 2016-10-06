@@ -1,5 +1,5 @@
 import pytest
-from thefuck.rules.open import is_arg_url, match, get_new_command
+from dwim.rules.open import is_arg_url, match, get_new_command
 from tests.utils import Command
 
 

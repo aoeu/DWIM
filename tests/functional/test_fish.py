@@ -2,7 +2,7 @@ import pytest
 from tests.functional.plots import with_confirmation, without_confirmation, \
     refuse_with_confirmation, select_command_with_arrows
 
-containers = (('thefuck/ubuntu-python3-fish',
+containers = (('dwim/ubuntu-python3-fish',
                u'''FROM ubuntu:latest
                    RUN apt-get update
                    RUN apt-get install -yy python3 python3-pip python3-dev fish git
@@ -10,7 +10,7 @@ containers = (('thefuck/ubuntu-python3-fish',
                    RUN ln -s /usr/bin/pip3 /usr/bin/pip
                    RUN apt-get install -yy fish''',
                u'fish'),
-              ('thefuck/ubuntu-python2-fish',
+              ('dwim/ubuntu-python2-fish',
                u'''FROM ubuntu:latest
                    RUN apt-get update
                    RUN apt-get install -yy python python-pip python-dev git
@@ -24,7 +24,7 @@ def proc(request, spawnu, TIMEOUT):
     proc = spawnu(*request.param)
     proc.sendline(u"pip install /src")
     assert proc.expect([TIMEOUT, u'Successfully installed'])
-    proc.sendline(u'thefuck --alias > ~/.config/fish/config.fish')
+    proc.sendline(u'dwim --alias > ~/.config/fish/config.fish')
     proc.sendline(u'fish')
     return proc
 

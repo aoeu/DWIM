@@ -1,6 +1,6 @@
 import pytest
 from io import BytesIO
-from thefuck.rules.npm_run_script import match, get_new_command
+from dwim.rules.npm_run_script import match, get_new_command
 from tests.utils import Command
 
 stdout = '''
@@ -49,7 +49,7 @@ available via `npm run-script`:
 
 @pytest.fixture(autouse=True)
 def run_script(mocker):
-    patch = mocker.patch('thefuck.specific.npm.Popen')
+    patch = mocker.patch('dwim.specific.npm.Popen')
     patch.return_value.stdout = BytesIO(run_script_stdout)
     return patch.return_value
 

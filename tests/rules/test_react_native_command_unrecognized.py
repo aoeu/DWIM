@@ -1,5 +1,5 @@
 import pytest
-from thefuck.rules.react_native_command_unrecognized import match, \
+from dwim.rules.react_native_command_unrecognized import match, \
     get_new_command
 from tests.utils import Command
 

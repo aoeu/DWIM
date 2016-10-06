@@ -1,8 +1,9 @@
-# The Fuck [![Version][version-badge]][version-link] [![Build Status][travis-badge]][travis-link] [![Windows Build Status][appveyor-badge]][appveyor-link] [![Coverage][coverage-badge]][coverage-link] [![MIT License][license-badge]](LICENSE.md)
+# DWIM [![Version][version-badge]][version-link] [![Build Status][travis-badge]][travis-link] [![Windows Build Status][appveyor-badge]][appveyor-link] [![Coverage][coverage-badge]][coverage-link] [![MIT License][license-badge]](LICENSE.md)
 
 Magnificent app which corrects your previous console command,
 inspired by a [@liamosaur](https://twitter.com/liamosaur/)
-[tweet](https://twitter.com/liamosaur/status/506975850596536320).
+[tweet](https://twitter.com/liamosaur/status/506975850596536320)
+ and the jargon ["Do What I Mean"](http://www.catb.org/jargon/html/D/DWIM.html).
 
 [![gif with examples][examples-link]][examples-link]
 
@@ -13,7 +14,7 @@ Few more examples:
 E: Could not open lock file /var/lib/dpkg/lock - open (13: Permission denied)
 E: Unable to lock the administration directory (/var/lib/dpkg/), are you root?
 
-➜ fuck
+➜ dwim
 sudo apt-get install vim [enter/↑/↓/ctrl+c]
 [sudo] password for nvbn:
 Reading package lists... Done
@@ -28,7 +29,7 @@ To push the current branch and set the remote as upstream, use
     git push --set-upstream origin master
 
 
-➜ fuck
+➜ dwim
 git push --set-upstream origin master [enter/↑/↓/ctrl+c]
 Counting objects: 9, done.
 ...
@@ -41,7 +42,7 @@ No command 'puthon' found, did you mean:
  Command 'python' from package 'python3' (main)
 zsh: command not found: puthon
 
-➜ fuck
+➜ dwim
 python [enter/↑/↓/ctrl+c]
 Python 3.4.2 (default, Oct  8 2014, 13:08:17)
 ...
@@ -54,7 +55,7 @@ git: 'brnch' is not a git command. See 'git --help'.
 Did you mean this?
     branch
 
-➜ fuck
+➜ dwim
 git branch [enter/↑/↓/ctrl+c]
 * master
 ```
@@ -66,7 +67,7 @@ git branch [enter/↑/↓/ctrl+c]
 Did you mean this?
          repl
 
-➜ fuck
+➜ dwim
 lein repl [enter/↑/↓/ctrl+c]
 nREPL server started on port 54848 on host 127.0.0.1 - nrepl://127.0.0.1:54848
 REPL-y 0.3.1
@@ -81,7 +82,7 @@ If you are not scared to blindly run the changed command, there is a `require_co
 E: Could not open lock file /var/lib/dpkg/lock - open (13: Permission denied)
 E: Unable to lock the administration directory (/var/lib/dpkg/), are you root?
 
-➜ fuck
+➜ dwim
 sudo apt-get install vim
 [sudo] password for nvbn:
 Reading package lists... Done
@@ -96,36 +97,36 @@ Reading package lists... Done
 
 ## Installation
 
-On OS X you can install `The Fuck` with [Homebrew][homebrew]:
+On OS X you can install `DWIM` with [Homebrew][homebrew]:
 
 ```bash
-brew install thefuck
+brew install dwim
 ```
 
-On Ubuntu you can install `The Fuck` with:
+On Ubuntu you can install `DWIM` with:
 ```bash
 sudo apt update
 sudo apt install python3-dev python3-pip
-sudo -H pip3 install thefuck
+sudo -H pip3 install dwim
 ```
 
-On other systems you can install `The Fuck` with `pip`:
+On other systems you can install `DWIM` with `pip`:
 
 ```bash
-sudo -H pip install thefuck
+sudo -H pip install dwim
 ```
 
-[Or using an OS package manager (OS X, Ubuntu, Arch).](https://github.com/nvbn/thefuck/wiki/Installation)
+[Or using an OS package manager (OS X, Ubuntu, Arch).](https://github.com/nvbn/dwim/wiki/Installation)
 
 You should place this command in your `.bash_profile`, `.bashrc`, `.zshrc` or other startup script:
 
 ```bash
-eval "$(thefuck --alias)"
+eval "$(dwim --alias)"
 # You can use whatever you want as an alias, like for Mondays:
-eval "$(thefuck --alias FUCK)"
+eval "$(dwim --alias DWIM)"
 ```
 
-[Or in your shell config (Bash, Zsh, Fish, Powershell, tcsh).](https://github.com/nvbn/thefuck/wiki/Shell-aliases)
+[Or in your shell config (Bash, Zsh, Fish, Powershell, tcsh).](https://github.com/nvbn/dwim/wiki/Shell-aliases)
 
 Changes will be available only in a new shell session.
 To make them available immediately, run `source ~/.bashrc` (or your shell config file like `.zshrc`).
@@ -134,14 +135,14 @@ To make them available immediately, run `source ~/.bashrc` (or your shell config
 ## Update
 
 ```bash
-sudo -H pip install thefuck --upgrade
+sudo -H pip install dwim --upgrade
 ```
 
 **Aliases changed in 1.34.**
 
 ## How it works
 
-The Fuck tries to match a rule for the previous command, creates a new command
+DWIM tries to match a rule for the previous command, creates a new command
 using the matched rule and runs it. Rules enabled by default are as follows:
 
 * `aws_cli` &ndash; fixes misspelled commands like `aws dynamdb scan`
@@ -258,7 +259,7 @@ Bundled, but not enabled by default:
 ## Creating your own rules
 
 For adding your own rule you should create `your-rule-name.py`
-in `~/.config/thefuck/rules`. The rule should contain two functions:
+in `~/.config/dwim/rules`. The rule should contain two functions:
 
 ```python
 match(command: Command) -> bool
@@ -274,8 +275,8 @@ and optional `enabled_by_default`, `requires_output` and `priority` variables.
 
 `Command` has three attributes: `script`, `stdout` and `stderr`.
 
-*Rules api changed in 3.0:* For accessing settings in rule you need to import it with `from thefuck.conf import settings`.
-`settings` is a special object filled with `~/.config/thefuck/settings.py` and values from env ([see more below](#settings)).
+*Rules api changed in 3.0:* For accessing settings in rule you need to import it with `from dwim.conf import settings`.
+`settings` is a special object filled with `~/.config/dwim/settings.py` and values from env ([see more below](#settings)).
 
 Simple example of the rule for running script with `sudo`:
 
@@ -299,15 +300,15 @@ priority = 1000  # Lower first, default is 1000
 requires_output = True
 ```
 
-[More examples of rules](https://github.com/nvbn/thefuck/tree/master/thefuck/rules),
-[utility functions for rules](https://github.com/nvbn/thefuck/tree/master/thefuck/utils.py),
-[app/os-specific helpers](https://github.com/nvbn/thefuck/tree/master/thefuck/specific/).
+[More examples of rules](https://github.com/nvbn/dwim/tree/master/dwim/rules),
+[utility functions for rules](https://github.com/nvbn/dwim/tree/master/dwim/utils.py),
+[app/os-specific helpers](https://github.com/nvbn/dwim/tree/master/dwim/specific/).
 
 ## Settings
 
-The Fuck has a few settings parameters which can be changed in `$XDG_CONFIG_HOME/thefuck/settings.py` (`$XDG_CONFIG_HOME` defaults to `~/.config`):
+DWIM has a few settings parameters which can be changed in `$XDG_CONFIG_HOME/dwim/settings.py` (`$XDG_CONFIG_HOME` defaults to `~/.config`):
 
-* `rules` &ndash; list of enabled rules, by default `thefuck.conf.DEFAULT_RULES`;
+* `rules` &ndash; list of enabled rules, by default `dwim.conf.DEFAULT_RULES`;
 * `exclude_rules` &ndash; list of disabled rules, by default `[]`;
 * `require_confirmation` &ndash; requires confirmation before running new command, by default `True`;
 * `wait_command` &ndash; max amount of time in seconds for getting previous command output;
@@ -336,34 +337,34 @@ slow_commands = ['react-native', 'gradle']
 
 Or via environment variables:
 
-* `THEFUCK_RULES` &ndash; list of enabled rules, like `DEFAULT_RULES:rm_root` or `sudo:no_command`;
-* `THEFUCK_EXCLUDE_RULES` &ndash; list of disabled rules, like `git_pull:git_push`;
-* `THEFUCK_REQUIRE_CONFIRMATION` &ndash; require confirmation before running new command, `true/false`;
-* `THEFUCK_WAIT_COMMAND` &ndash; max amount of time in seconds for getting previous command output;
-* `THEFUCK_NO_COLORS` &ndash; disable colored output, `true/false`;
-* `THEFUCK_PRIORITY` &ndash; priority of the rules, like `no_command=9999:apt_get=100`,
+* `DWIM_RULES` &ndash; list of enabled rules, like `DEFAULT_RULES:rm_root` or `sudo:no_command`;
+* `DWIM_EXCLUDE_RULES` &ndash; list of disabled rules, like `git_pull:git_push`;
+* `DWIM_REQUIRE_CONFIRMATION` &ndash; require confirmation before running new command, `true/false`;
+* `DWIM_WAIT_COMMAND` &ndash; max amount of time in seconds for getting previous command output;
+* `DWIM_NO_COLORS` &ndash; disable colored output, `true/false`;
+* `DWIM_PRIORITY` &ndash; priority of the rules, like `no_command=9999:apt_get=100`,
 rule with lower `priority` will be matched first;
-* `THEFUCK_DEBUG` &ndash; enables debug output, `true/false`;
-* `THEFUCK_HISTORY_LIMIT` &ndash; how many history commands will be scanned, like `2000`;
-* `THEFUCK_ALTER_HISTORY` &ndash; push fixed command to history `true/false`;
-* `THEFUCK_WAIT_SLOW_COMMAND` &ndash; max amount of time in seconds for getting previous command output if it in `slow_commands` list;
-* `THEFUCK_SLOW_COMMANDS` &ndash; list of slow commands, like `lein:gradle`.
+* `DWIM_DEBUG` &ndash; enables debug output, `true/false`;
+* `DWIM_HISTORY_LIMIT` &ndash; how many history commands will be scanned, like `2000`;
+* `DWIM_ALTER_HISTORY` &ndash; push fixed command to history `true/false`;
+* `DWIM_WAIT_SLOW_COMMAND` &ndash; max amount of time in seconds for getting previous command output if it in `slow_commands` list;
+* `DWIM_SLOW_COMMANDS` &ndash; list of slow commands, like `lein:gradle`.
 
 For example:
 
 ```bash
-export THEFUCK_RULES='sudo:no_command'
-export THEFUCK_EXCLUDE_RULES='git_pull:git_push'
-export THEFUCK_REQUIRE_CONFIRMATION='true'
-export THEFUCK_WAIT_COMMAND=10
-export THEFUCK_NO_COLORS='false'
-export THEFUCK_PRIORITY='no_command=9999:apt_get=100'
-export THEFUCK_HISTORY_LIMIT='2000'
+export DWIM_RULES='sudo:no_command'
+export DWIM_EXCLUDE_RULES='git_pull:git_push'
+export DWIM_REQUIRE_CONFIRMATION='true'
+export DWIM_WAIT_COMMAND=10
+export DWIM_NO_COLORS='false'
+export DWIM_PRIORITY='no_command=9999:apt_get=100'
+export DWIM_HISTORY_LIMIT='2000'
 ```
 
 ## Developing
 
-Install `The Fuck` for development:
+Install `DWIM` for development:
 
 ```bash
 pip install -r requirements.txt
@@ -393,14 +394,14 @@ sudo apt-get install pandoc
 Project License can be found [here](LICENSE.md).
 
 
-[version-badge]:   https://img.shields.io/pypi/v/thefuck.svg?label=version
-[version-link]:    https://pypi.python.org/pypi/thefuck/
-[travis-badge]:    https://img.shields.io/travis/nvbn/thefuck.svg
-[travis-link]:     https://travis-ci.org/nvbn/thefuck
-[appveyor-badge]:  https://img.shields.io/appveyor/ci/nvbn/thefuck.svg?label=windows%20build
-[appveyor-link]:   https://ci.appveyor.com/project/nvbn/thefuck
-[coverage-badge]:  https://img.shields.io/coveralls/nvbn/thefuck.svg
-[coverage-link]:   https://coveralls.io/github/nvbn/thefuck
+[version-badge]:   https://img.shields.io/pypi/v/dwim.svg?label=version
+[version-link]:    https://pypi.python.org/pypi/dwim/
+[travis-badge]:    https://img.shields.io/travis/nvbn/dwim.svg
+[travis-link]:     https://travis-ci.org/nvbn/dwim
+[appveyor-badge]:  https://img.shields.io/appveyor/ci/nvbn/dwim.svg?label=windows%20build
+[appveyor-link]:   https://ci.appveyor.com/project/nvbn/dwim
+[coverage-badge]:  https://img.shields.io/coveralls/nvbn/dwim.svg
+[coverage-link]:   https://coveralls.io/github/nvbn/dwim
 [license-badge]:   https://img.shields.io/badge/license-MIT-007EC7.svg
-[examples-link]:   https://raw.githubusercontent.com/nvbn/thefuck/master/example.gif
+[examples-link]:   https://raw.githubusercontent.com/nvbn/dwim/master/example.gif
 [homebrew]:        http://brew.sh/

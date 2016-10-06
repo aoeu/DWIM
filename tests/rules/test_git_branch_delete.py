@@ -1,5 +1,5 @@
 import pytest
-from thefuck.rules.git_branch_delete import match, get_new_command
+from dwim.rules.git_branch_delete import match, get_new_command
 from tests.utils import Command
 
 

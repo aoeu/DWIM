@@ -1,5 +1,5 @@
 import pytest
-from thefuck.rules.git_diff_no_index import match, get_new_command
+from dwim.rules.git_diff_no_index import match, get_new_command
 from tests.utils import Command
 
 

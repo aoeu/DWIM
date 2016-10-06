@@ -1,11 +1,11 @@
 import pytest
-from thefuck.rules.git_add import match, get_new_command
+from dwim.rules.git_add import match, get_new_command
 from tests.utils import Command
 
 
 @pytest.fixture(autouse=True)
 def path_exists(mocker):
-    return mocker.patch('thefuck.rules.git_add.Path.exists',
+    return mocker.patch('dwim.rules.git_add.Path.exists',
                         return_value=True)
 
 

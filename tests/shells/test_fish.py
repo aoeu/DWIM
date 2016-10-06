@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pytest
-from thefuck.shells import Fish
+from dwim.shells import Fish
 
 
 @pytest.mark.usefixtures('isfile', 'no_memoize', 'no_cache')
@@ -12,9 +12,9 @@ class TestFish(object):
 
     @pytest.fixture(autouse=True)
     def Popen(self, mocker):
-        mock = mocker.patch('thefuck.shells.fish.Popen')
+        mock = mocker.patch('dwim.shells.fish.Popen')
         mock.return_value.stdout.read.return_value = (
-            b'cd\nfish_config\nfuck\nfunced\nfuncsave\ngrep\nhistory\nll\nls\n'
+            b'cd\nfish_config\ndwim\nfunced\nfuncsave\ngrep\nhistory\nll\nls\n'
             b'man\nmath\npopd\npushd\nruby')
         return mock
 
@@ -24,10 +24,10 @@ class TestFish(object):
 
     @pytest.mark.parametrize('key, value', [
         ('TF_OVERRIDDEN_ALIASES', 'cut,git,sed'),  # legacy
-        ('THEFUCK_OVERRIDDEN_ALIASES', 'cut,git,sed'),
-        ('THEFUCK_OVERRIDDEN_ALIASES', 'cut, git, sed'),
-        ('THEFUCK_OVERRIDDEN_ALIASES', ' cut,\tgit,sed\n'),
-        ('THEFUCK_OVERRIDDEN_ALIASES', '\ncut,\n\ngit,\tsed\r')])
+        ('DWIM_OVERRIDDEN_ALIASES', 'cut,git,sed'),
+        ('DWIM_OVERRIDDEN_ALIASES', 'cut, git, sed'),
+        ('DWIM_OVERRIDDEN_ALIASES', ' cut,\tgit,sed\n'),
+        ('DWIM_OVERRIDDEN_ALIASES', '\ncut,\n\ngit,\tsed\r')])
     def test_get_overridden_aliases(self, shell, os_environ):
         assert shell._get_overridden_aliases() == {'cd', 'cut', 'git', 'grep',
                                                    'ls', 'man', 'open', 'sed'}
@@ -35,7 +35,7 @@ class TestFish(object):
     @pytest.mark.parametrize('before, after', [
         ('cd', 'cd'),
         ('pwd', 'pwd'),
-        ('fuck', 'fish -ic "fuck"'),
+        ('dwim', 'fish -ic "dwim"'),
         ('find', 'find'),
         ('funced', 'fish -ic "funced"'),
         ('grep', 'grep'),
@@ -57,7 +57,7 @@ class TestFish(object):
 
     def test_get_aliases(self, shell):
         assert shell.get_aliases() == {'fish_config': 'fish_config',
-                                       'fuck': 'fuck',
+                                       'dwim': 'dwim',
                                        'funced': 'funced',
                                        'funcsave': 'funcsave',
                                        'history': 'history',
@@ -68,19 +68,19 @@ class TestFish(object):
                                        'ruby': 'ruby'}
 
     def test_app_alias(self, shell):
-        assert 'function fuck' in shell.app_alias('fuck')
-        assert 'function FUCK' in shell.app_alias('FUCK')
-        assert 'thefuck' in shell.app_alias('fuck')
-        assert 'TF_ALIAS=fuck PYTHONIOENCODING' in shell.app_alias('fuck')
-        assert 'PYTHONIOENCODING=utf-8 thefuck' in shell.app_alias('fuck')
+        assert 'function dwim' in shell.app_alias('dwim')
+        assert 'function DWIM' in shell.app_alias('DWIM')
+        assert 'dwim' in shell.app_alias('dwim')
+        assert 'TF_ALIAS=dwim PYTHONIOENCODING' in shell.app_alias('dwim')
+        assert 'PYTHONIOENCODING=utf-8 dwim' in shell.app_alias('dwim')
 
     def test_app_alias_alter_history(self, settings, shell):
         settings.alter_history = True
-        assert 'history --delete' in shell.app_alias('FUCK')
-        assert 'history --merge' in shell.app_alias('FUCK')
+        assert 'history --delete' in shell.app_alias('DWIM')
+        assert 'history --merge' in shell.app_alias('DWIM')
         settings.alter_history = False
-        assert 'history --delete' not in shell.app_alias('FUCK')
-        assert 'history --merge' not in shell.app_alias('FUCK')
+        assert 'history --delete' not in shell.app_alias('DWIM')
+        assert 'history --merge' not in shell.app_alias('DWIM')
 
     def test_get_history(self, history_lines, shell):
         history_lines(['- cmd: ls', '  when: 1432613911',
@@ -91,7 +91,7 @@ class TestFish(object):
         ('ls', '- cmd: ls\n   when: 1430707243\n'),
         (u'echo café', '- cmd: echo café\n   when: 1430707243\n')])
     def test_put_to_history(self, entry, entry_utf8, builtins_open, mocker, shell):
-        mocker.patch('thefuck.shells.fish.time', return_value=1430707243.3517463)
+        mocker.patch('dwim.shells.fish.time', return_value=1430707243.3517463)
         shell.put_to_history(entry)
         builtins_open.return_value.__enter__.return_value. \
             write.assert_called_once_with(entry_utf8)

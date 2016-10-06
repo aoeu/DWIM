@@ -1,18 +1,18 @@
 import pytest
-from thefuck.rules.no_command import match, get_new_command
+from dwim.rules.no_command import match, get_new_command
 from tests.utils import Command
 
 
 @pytest.fixture(autouse=True)
 def get_all_executables(mocker):
-    mocker.patch('thefuck.rules.no_command.get_all_executables',
+    mocker.patch('dwim.rules.no_command.get_all_executables',
                  return_value=['vim', 'fsck', 'git', 'go'])
 
 
 @pytest.fixture(autouse=True)
 def history_without_current(mocker):
     return mocker.patch(
-        'thefuck.rules.no_command.get_valid_history_without_current',
+        'dwim.rules.no_command.get_valid_history_without_current',
         return_value=['git commit'])
 
 
@@ -22,7 +22,7 @@ def history_without_current(mocker):
     ('fucck', 'fucck: not found'),
     ('got commit', 'got: command not found')])
 def test_match(mocker, script, stderr):
-    mocker.patch('thefuck.rules.no_command.which', return_value=None)
+    mocker.patch('dwim.rules.no_command.which', return_value=None)
 
     assert match(Command(script, stderr=stderr))
 
@@ -33,7 +33,7 @@ def test_match(mocker, script, stderr):
     ('vom file.py', 'some text', None),
     ('vim file.py', 'vim: not found', 'vim')])
 def test_not_match(mocker, script, stderr, which):
-    mocker.patch('thefuck.rules.no_command.which', return_value=which)
+    mocker.patch('dwim.rules.no_command.which', return_value=which)
 
     assert not match(Command(script, stderr=stderr))
 

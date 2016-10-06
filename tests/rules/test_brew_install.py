@@ -1,6 +1,6 @@
 import pytest
-from thefuck.rules.brew_install import match, get_new_command
-from thefuck.rules.brew_install import _get_formulas
+from dwim.rules.brew_install import match, get_new_command
+from dwim.rules.brew_install import _get_formulas
 from tests.utils import Command
 
 

@@ -1,4 +1,4 @@
-from thefuck.rules.systemctl import match, get_new_command
+from dwim.rules.systemctl import match, get_new_command
 from tests.utils import Command
 
 

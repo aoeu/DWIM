@@ -1,5 +1,5 @@
 import pytest
-from thefuck.rules.fab_command_not_found import match, get_new_command
+from dwim.rules.fab_command_not_found import match, get_new_command
 from tests.utils import Command
 
 stderr = '''
@@ -41,8 +41,8 @@ def test_not_match(command):
      'fab prepare_extension:version=2016'),
     ('fab extenson:version=2016 install_web set_version:val=0.5.0',
      'fab prepare_extension:version=2016 install_web set_version:val=0.5.0'),
-    ('fab extenson:version=2016 deloyp:beta=true -H the.fuck',
-     'fab prepare_extension:version=2016 deploy:beta=true -H the.fuck'),
+    ('fab extenson:version=2016 deloyp:beta=true -H the.dwim',
+     'fab prepare_extension:version=2016 deploy:beta=true -H the.dwim'),
 ])
 def test_get_new_command(script, result):
     command = Command(script, stdout,stderr)

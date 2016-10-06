@@ -1,5 +1,5 @@
 import pytest
-from thefuck.rules.apt_get import match, get_new_command
+from dwim.rules.apt_get import match, get_new_command
 from tests.utils import Command
 
 
@@ -9,8 +9,8 @@ from tests.utils import Command
     (Command(script='sudo vim', stderr='vim: command not found'),
      [('vim', 'main'), ('vim-tiny', 'main')])])
 def test_match(mocker, command, packages):
-    mocker.patch('thefuck.rules.apt_get.which', return_value=None)
-    mock = mocker.patch('thefuck.rules.apt_get.command_not_found',
+    mocker.patch('dwim.rules.apt_get.which', return_value=None)
+    mock = mocker.patch('dwim.rules.apt_get.command_not_found',
                         create=True)
     mock.getPackages.return_value = packages
 
@@ -27,8 +27,8 @@ def test_match(mocker, command, packages):
     (Command(script='sudo vim', stderr='vim: command not found'),
      ['vim'], '/usr/bin/vim')])
 def test_not_match(mocker, command, packages, which):
-    mocker.patch('thefuck.rules.apt_get.which', return_value=which)
-    mock = mocker.patch('thefuck.rules.apt_get.command_not_found',
+    mocker.patch('dwim.rules.apt_get.which', return_value=which)
+    mock = mocker.patch('dwim.rules.apt_get.command_not_found',
                         create=True)
     mock.getPackages.return_value = packages
 
@@ -47,7 +47,7 @@ def test_not_match(mocker, command, packages, which):
      [('imagemagick', 'main'),
       ('graphicsmagick-imagemagick-compat', 'universe')])])
 def test_get_new_command(mocker, command, new_command, packages):
-    mock = mocker.patch('thefuck.rules.apt_get.command_not_found',
+    mock = mocker.patch('dwim.rules.apt_get.command_not_found',
                         create=True)
     mock.getPackages.return_value = packages
     assert get_new_command(command) == new_command

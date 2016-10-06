@@ -1,5 +1,5 @@
 import pytest
-from thefuck.rules.git_fix_stash import match, get_new_command
+from dwim.rules.git_fix_stash import match, get_new_command
 from tests.utils import Command
 
 

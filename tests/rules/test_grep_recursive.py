@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from thefuck.rules.grep_recursive import match, get_new_command
+from dwim.rules.grep_recursive import match, get_new_command
 from tests.utils import Command
 
 

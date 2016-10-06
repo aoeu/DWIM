@@ -1,21 +1,21 @@
 import pytest
-from thefuck import shells
-from thefuck import conf, const
-from thefuck.system import Path
+from dwim import shells
+from dwim import conf, const
+from dwim.system import Path
 
 shells.shell = shells.Generic()
 
 
 def pytest_addoption(parser):
     """Adds `--run-without-docker` argument."""
-    group = parser.getgroup("thefuck")
+    group = parser.getgroup("dwim")
     group.addoption('--enable-functional', action="store_true", default=False,
                     help="Enable functional tests")
 
 
 @pytest.fixture
 def no_memoize(monkeypatch):
-    monkeypatch.setattr('thefuck.utils.memoize.disabled', True)
+    monkeypatch.setattr('dwim.utils.memoize.disabled', True)
 
 
 @pytest.fixture(autouse=True)
@@ -25,7 +25,7 @@ def settings(request):
         conf.settings.update(const.DEFAULT_SETTINGS)
 
     request.addfinalizer(_reset_settings)
-    conf.settings.user_dir = Path('~/.thefuck')
+    conf.settings.user_dir = Path('~/.dwim')
     return conf.settings
 
 
@@ -36,7 +36,7 @@ def no_colors(settings):
 
 @pytest.fixture(autouse=True)
 def no_cache(monkeypatch):
-    monkeypatch.setattr('thefuck.utils.cache.disabled', True)
+    monkeypatch.setattr('dwim.utils.cache.disabled', True)
 
 
 @pytest.fixture(autouse=True)
@@ -55,7 +55,7 @@ def source_root():
 def set_shell(monkeypatch, request):
     def _set(cls):
         shell = cls()
-        monkeypatch.setattr('thefuck.shells.shell', shell)
+        monkeypatch.setattr('dwim.shells.shell', shell)
         request.addfinalizer()
         return shell
 

@@ -2,7 +2,7 @@ import pytest
 from tests.functional.plots import with_confirmation, without_confirmation, \
     refuse_with_confirmation, select_command_with_arrows
 
-containers = (('thefuck/ubuntu-python3-tcsh',
+containers = (('dwim/ubuntu-python3-tcsh',
                u'''FROM ubuntu:latest
                    RUN apt-get update
                    RUN apt-get install -yy python3 python3-pip python3-dev git
@@ -10,7 +10,7 @@ containers = (('thefuck/ubuntu-python3-tcsh',
                    RUN ln -s /usr/bin/pip3 /usr/bin/pip
                    RUN apt-get install -yy tcsh''',
                u'tcsh'),
-              ('thefuck/ubuntu-python2-tcsh',
+              ('dwim/ubuntu-python2-tcsh',
                u'''FROM ubuntu:latest
                    RUN apt-get update
                    RUN apt-get install -yy python python-pip python-dev git
@@ -26,7 +26,7 @@ def proc(request, spawnu, TIMEOUT):
     assert proc.expect([TIMEOUT, u'Successfully installed'])
     proc.sendline(u'tcsh')
     proc.sendline(u'setenv PYTHONIOENCODING utf8')
-    proc.sendline(u'eval `thefuck --alias`')
+    proc.sendline(u'eval `dwim --alias`')
     return proc
 
 

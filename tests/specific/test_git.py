@@ -1,5 +1,5 @@
 import pytest
-from thefuck.specific.git import git_support
+from dwim.specific.git import git_support
 from tests.utils import Command
 
 

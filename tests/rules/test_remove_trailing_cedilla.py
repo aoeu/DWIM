@@ -1,5 +1,5 @@
 import pytest
-from thefuck.rules.remove_trailing_cedilla import match, get_new_command, CEDILLA
+from dwim.rules.remove_trailing_cedilla import match, get_new_command, CEDILLA
 from tests.utils import Command
 
 

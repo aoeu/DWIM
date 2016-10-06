@@ -1,5 +1,5 @@
 import pytest
-from thefuck.rules.ln_s_order import match, get_new_command
+from dwim.rules.ln_s_order import match, get_new_command
 from tests.utils import Command
 
 

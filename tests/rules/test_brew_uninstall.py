@@ -1,6 +1,6 @@
 import pytest
 from tests.utils import Command
-from thefuck.rules.brew_uninstall import get_new_command, match
+from dwim.rules.brew_uninstall import get_new_command, match
 
 
 @pytest.fixture

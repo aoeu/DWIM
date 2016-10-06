@@ -1,6 +1,6 @@
 import pytest
 
-from thefuck.rules.aws_cli import match, get_new_command
+from dwim.rules.aws_cli import match, get_new_command
 from tests.utils import Command
 
 

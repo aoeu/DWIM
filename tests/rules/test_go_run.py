@@ -1,5 +1,5 @@
 import pytest
-from thefuck.rules.go_run import match, get_new_command
+from dwim.rules.go_run import match, get_new_command
 from tests.utils import Command
 
 

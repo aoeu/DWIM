@@ -1,5 +1,5 @@
 import pytest
-from thefuck.rules.tsuru_login import match, get_new_command
+from dwim.rules.tsuru_login import match, get_new_command
 from tests.utils import Command
 
 

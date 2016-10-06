@@ -4,7 +4,7 @@ import pytest
 import warnings
 from mock import Mock
 import six
-from thefuck.utils import default_settings, \
+from dwim.utils import default_settings, \
     memoize, get_closest, get_all_executables, replace_argument, \
     get_all_matched_commands, is_app, for_app, cache, \
     get_valid_history_without_current
@@ -54,8 +54,8 @@ class TestGetClosest(object):
 
 @pytest.fixture
 def get_aliases(mocker):
-    mocker.patch('thefuck.shells.shell.get_aliases',
-                 return_value=['vim', 'apt-get', 'fsck', 'fuck'])
+    mocker.patch('dwim.shells.shell.get_aliases',
+                 return_value=['vim', 'apt-get', 'fsck', 'dwim'])
 
 
 @pytest.mark.usefixtures('no_memoize', 'get_aliases')
@@ -63,7 +63,7 @@ def test_get_all_executables():
     all_callables = get_all_executables()
     assert 'vim' in all_callables
     assert 'fsck' in all_callables
-    assert 'fuck' not in all_callables
+    assert 'dwim' not in all_callables
 
 
 @pytest.mark.parametrize('args, result', [
@@ -127,7 +127,7 @@ def test_for_app(script, names, result):
 class TestCache(object):
     @pytest.fixture(autouse=True)
     def enable_cache(self, monkeypatch):
-        monkeypatch.setattr('thefuck.utils.cache.disabled', False)
+        monkeypatch.setattr('dwim.utils.cache.disabled', False)
 
     @pytest.fixture
     def shelve(self, mocker):
@@ -149,12 +149,12 @@ class TestCache(object):
             def close(self):
                 return
 
-        mocker.patch('thefuck.utils.shelve.open', new_callable=lambda: _Shelve)
+        mocker.patch('dwim.utils.shelve.open', new_callable=lambda: _Shelve)
         return value
 
     @pytest.fixture(autouse=True)
     def mtime(self, mocker):
-        mocker.patch('thefuck.utils.os.path.getmtime', return_value=0)
+        mocker.patch('dwim.utils.os.path.getmtime', return_value=0)
 
     @pytest.fixture
     def fn(self):
@@ -197,30 +197,30 @@ class TestGetValidHistoryWithoutCurrent(object):
 
     @pytest.fixture(autouse=True)
     def history(self, mocker):
-        return mocker.patch('thefuck.shells.shell.get_history',
-                            return_value=['le cat', 'fuck', 'ls cat',
+        return mocker.patch('dwim.shells.shell.get_history',
+                            return_value=['le cat', 'dwim', 'ls cat',
                                           'diff x', 'nocommand x', u'café ô'])
 
     @pytest.fixture(autouse=True)
     def alias(self, mocker):
-        return mocker.patch('thefuck.utils.get_alias',
-                            return_value='fuck')
+        return mocker.patch('dwim.utils.get_alias',
+                            return_value='dwim')
 
     @pytest.fixture(autouse=True)
     def bins(self, mocker, monkeypatch):
-        monkeypatch.setattr('thefuck.conf.os.environ', {'PATH': 'path'})
+        monkeypatch.setattr('dwim.conf.os.environ', {'PATH': 'path'})
         callables = list()
         for name in ['diff', 'ls', 'café']:
             bin_mock = mocker.Mock(name=name)
             bin_mock.configure_mock(name=name, is_dir=lambda: False)
             callables.append(bin_mock)
         path_mock = mocker.Mock(iterdir=mocker.Mock(return_value=callables))
-        return mocker.patch('thefuck.utils.Path', return_value=path_mock)
+        return mocker.patch('dwim.utils.Path', return_value=path_mock)
 
     @pytest.mark.parametrize('script, result', [
         ('le cat', ['ls cat', 'diff x', u'café ô']),
         ('diff x', ['ls cat', u'café ô']),
-        ('fuck', ['ls cat', 'diff x', u'café ô']),
+        ('dwim', ['ls cat', 'diff x', u'café ô']),
         (u'cafe ô', ['ls cat', 'diff x', u'café ô']),
     ])
     def test_get_valid_history_without_current(self, script, result):

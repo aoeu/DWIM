@@ -3,7 +3,7 @@ from tests.functional.plots import with_confirmation, without_confirmation, \
     refuse_with_confirmation, history_changed, history_not_changed, \
     select_command_with_arrows, how_to_configure
 
-containers = (('thefuck/ubuntu-python3-zsh',
+containers = (('dwim/ubuntu-python3-zsh',
                u'''FROM ubuntu:latest
                    RUN apt-get update
                    RUN apt-get install -yy python3 python3-pip python3-dev git
@@ -11,7 +11,7 @@ containers = (('thefuck/ubuntu-python3-zsh',
                    RUN ln -s /usr/bin/pip3 /usr/bin/pip
                    RUN apt-get install -yy zsh''',
                u'zsh'),
-              ('thefuck/ubuntu-python2-zsh',
+              ('dwim/ubuntu-python2-zsh',
                u'''FROM ubuntu:latest
                    RUN apt-get update
                    RUN apt-get install -yy python python-pip python-dev git
@@ -25,7 +25,7 @@ def proc(request, spawnu, TIMEOUT):
     proc = spawnu(*request.param)
     proc.sendline(u'pip install /src')
     assert proc.expect([TIMEOUT, u'Successfully installed'])
-    proc.sendline(u'eval $(thefuck --alias)')
+    proc.sendline(u'eval $(dwim --alias)')
     proc.sendline(u'export HISTFILE=~/.zsh_history')
     proc.sendline(u'echo > $HISTFILE')
     proc.sendline(u'export SAVEHIST=100')

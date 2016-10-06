@@ -3,14 +3,14 @@ from tests.functional.plots import with_confirmation, without_confirmation, \
     refuse_with_confirmation, history_changed, history_not_changed, \
     select_command_with_arrows, how_to_configure
 
-containers = ((u'thefuck/ubuntu-python3-bash',
+containers = ((u'dwim/ubuntu-python3-bash',
                u'''FROM ubuntu:latest
                    RUN apt-get update
                    RUN apt-get install -yy python3 python3-pip python3-dev git
                    RUN pip3 install -U setuptools
                    RUN ln -s /usr/bin/pip3 /usr/bin/pip''',
                u'bash'),
-              (u'thefuck/ubuntu-python2-bash',
+              (u'dwim/ubuntu-python2-bash',
                u'''FROM ubuntu:latest
                    RUN apt-get update
                    RUN apt-get install -yy python python-pip python-dev git
@@ -24,7 +24,7 @@ def proc(request, spawnu, TIMEOUT):
     proc.sendline(u"pip install /src")
     assert proc.expect([TIMEOUT, u'Successfully installed'])
     proc.sendline(u"export PS1='$ '")
-    proc.sendline(u'eval $(thefuck --alias)')
+    proc.sendline(u'eval $(dwim --alias)')
     proc.sendline(u'echo > $HISTFILE')
     return proc
 

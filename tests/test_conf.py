@@ -2,18 +2,18 @@ import pytest
 import six
 import os
 from mock import Mock
-from thefuck import const
+from dwim import const
 
 
 @pytest.fixture
 def load_source(mocker):
-    return mocker.patch('thefuck.conf.load_source')
+    return mocker.patch('dwim.conf.load_source')
 
 
 @pytest.fixture
 def environ(monkeypatch):
     data = {}
-    monkeypatch.setattr('thefuck.conf.os.environ', data)
+    monkeypatch.setattr('dwim.conf.os.environ', data)
     return data
 
 
@@ -55,14 +55,14 @@ class TestSettingsFromFile(object):
 @pytest.mark.usefixture('load_source')
 class TestSettingsFromEnv(object):
     def test_from_env(self, environ, settings):
-        environ.update({'THEFUCK_RULES': 'bash:lisp',
-                        'THEFUCK_EXCLUDE_RULES': 'git:vim',
-                        'THEFUCK_WAIT_COMMAND': '55',
-                        'THEFUCK_REQUIRE_CONFIRMATION': 'true',
-                        'THEFUCK_NO_COLORS': 'false',
-                        'THEFUCK_PRIORITY': 'bash=10:lisp=wrong:vim=15',
-                        'THEFUCK_WAIT_SLOW_COMMAND': '999',
-                        'THEFUCK_SLOW_COMMANDS': 'lein:react-native:./gradlew'})
+        environ.update({'DWIM_RULES': 'bash:lisp',
+                        'DWIM_EXCLUDE_RULES': 'git:vim',
+                        'DWIM_WAIT_COMMAND': '55',
+                        'DWIM_REQUIRE_CONFIRMATION': 'true',
+                        'DWIM_NO_COLORS': 'false',
+                        'DWIM_PRIORITY': 'bash=10:lisp=wrong:vim=15',
+                        'DWIM_WAIT_SLOW_COMMAND': '999',
+                        'DWIM_SLOW_COMMANDS': 'lein:react-native:./gradlew'})
         settings.init()
         assert settings.rules == ['bash', 'lisp']
         assert settings.exclude_rules == ['git', 'vim']
@@ -74,7 +74,7 @@ class TestSettingsFromEnv(object):
         assert settings.slow_commands == ['lein', 'react-native', './gradlew']
 
     def test_from_env_with_DEFAULT(self, environ, settings):
-        environ.update({'THEFUCK_RULES': 'DEFAULT_RULES:bash:lisp'})
+        environ.update({'DWIM_RULES': 'DEFAULT_RULES:bash:lisp'})
         settings.init()
         assert settings.rules == const.DEFAULT_RULES + ['bash', 'lisp']
 
@@ -105,13 +105,13 @@ class TestInitializeSettingsFile(object):
 
 
 @pytest.mark.parametrize('legacy_dir_exists, xdg_config_home, result', [
-    (False, '~/.config', '~/.config/thefuck'),
-    (False, '/user/test/config/', '/user/test/config/thefuck'),
-    (True, '~/.config', '~/.thefuck'),
-    (True, '/user/test/config/', '~/.thefuck')])
+    (False, '~/.config', '~/.config/dwim'),
+    (False, '/user/test/config/', '/user/test/config/dwim'),
+    (True, '~/.config', '~/.dwim'),
+    (True, '/user/test/config/', '~/.dwim')])
 def test_get_user_dir_path(mocker, environ, settings, legacy_dir_exists,
                            xdg_config_home, result):
-    mocker.patch('thefuck.conf.Path.is_dir',
+    mocker.patch('dwim.conf.Path.is_dir',
                  return_value=legacy_dir_exists)
 
     if xdg_config_home is not None:

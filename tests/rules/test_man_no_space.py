@@ -1,4 +1,4 @@
-from thefuck.rules.man_no_space import match, get_new_command
+from dwim.rules.man_no_space import match, get_new_command
 from tests.utils import Command
 
 
