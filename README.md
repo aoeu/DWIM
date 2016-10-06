@@ -5,9 +5,7 @@ inspired by a [@liamosaur](https://twitter.com/liamosaur/)
 [tweet](https://twitter.com/liamosaur/status/506975850596536320)
  and the jargon ["Do What I Mean"](http://www.catb.org/jargon/html/D/DWIM.html).
 
-[![gif with examples][examples-link]][examples-link]
-
-Few more examples:
+Examples:
 
 ```bash
 ➜ apt-get install vim
